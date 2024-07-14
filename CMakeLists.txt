@@ -24,13 +24,13 @@ if(NATIVE)
   if(CMAKE_Fortran_COMPILER_ID STREQUAL "Intel")
     # Intel compiler: search for -m, -x, -ax flags; if not found add -xHost.
     if(NOT CMAKE_Fortran_FLAGS MATCHES "(^| )-(m|x|ax)[^ ]+")
-      string(APPEND CMAKE_Fortran_FLAGS " -xHost")
+      string(APPEND CMAKE_Fortran_FLAGS " -xHost -save")
     endif()
   else()
     # All other compilers (gcc-like): search for -m flags;
     # if not found add -march=native.
     if(NOT CMAKE_Fortran_FLAGS MATCHES "(^| )-m[^ ]+")
-      string(APPEND CMAKE_Fortran_FLAGS " -march=native")
+      string(APPEND CMAKE_Fortran_FLAGS " -march=native -fno-automatic -fallow-argument-mismatch")
     endif()
   endif()
 endif()
